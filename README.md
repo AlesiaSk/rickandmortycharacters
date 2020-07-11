@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Live example
+
+Open http://AlesiaSk.github.io/rickandmortycharacters to view it in the browser.
+
 ## Available Scripts
 
 In the project directory, you can run:

@@ -14,5 +14,5 @@ function App() {
 export default App;
 
 const Main = styled.main`
-background: url(${background});
+  background: url(${background});
 `;
