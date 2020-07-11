@@ -6,29 +6,52 @@ import {getAllCharacters} from "../../actions/character";
 
 const List = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const locations = useSelector(state => state.locations);
+    const characters = useSelector(state => state.characters);
     const dispatch = useDispatch();
 
-    const lastPage = locations?.info.pages;
+    const lastPage = characters?.info.pages;
 
     useEffect(() => {dispatch(getAllCharacters(currentPage));}, [dispatch, currentPage]);
 
-    const handleScroll = (event) => {
-        const target = event.target;
+    useEffect(() => {
+        const handleScroll = () => {
+            setCurrentPage(currentPage => {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && currentPage < lastPage) {
+                    return currentPage + 1
+                }
 
-        if(target.scrollHeight - target.scrollTop === target.clientHeight && currentPage < lastPage) {
-            setCurrentPage(currentPage + 1);
-            console.log('current page', currentPage);
-        }
-    };
+                return currentPage;
+            });
+        };
 
-    return (<Content onScroll={handleScroll}>{locations.results.map(location => <p key={location.id}>{location.name}</p>)}</Content>);
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [lastPage]);
+
+    return (<div>{characters.results.map(character => <Container key={character.id}><Span>{character.name}</Span><Image src={character.image} alt={character.name}/>
+    </Container>)}</div>);
 };
 
 export default List;
 
-const Content = styled.div`
-height: 300px;
-border: 2px solid deeppink;
-overflow-y: auto;
+const Container = styled.div`
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const Span = styled.span`
+   font-size: 25px;
+   margin-right: 15px;
+   color: #fff;
+   font-weight: bold;
+`;
+
+const Image = styled.img`
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 `;
