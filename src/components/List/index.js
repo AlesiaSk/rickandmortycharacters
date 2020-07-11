@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/macro';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 import {getAllCharacters} from "../../actions/character";
 
@@ -11,7 +11,9 @@ const List = () => {
 
     const lastPage = characters?.info.pages;
 
-    useEffect(() => {dispatch(getAllCharacters(currentPage));}, [dispatch, currentPage]);
+    useEffect(() => {
+        dispatch(getAllCharacters(currentPage));
+    }, [dispatch, currentPage]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -30,8 +32,15 @@ const List = () => {
         };
     }, [lastPage]);
 
-    return (<div>{characters.results.map(character => <Container key={character.id}><Span>{character.name}</Span><Image src={character.image} alt={character.name}/>
-    </Container>)}</div>);
+    return (
+        <div>
+            {characters.results.map(character =>
+                <Container key={character.id}>
+                    <Span>{character.name}</Span>
+                    <Image src={character.image} alt={character.name}/>
+                </Container>
+            )}
+        </div>);
 };
 
 export default List;
