@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
-import LocationSagas from './location';
+import Character from './character';
 
 export default function* rootSaga() {
     yield all([
-        LocationSagas(),
+        Character(),
     ]);
 }

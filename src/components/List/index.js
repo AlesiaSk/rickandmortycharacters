@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
 
-import {getAllLocations} from "../../actions/location";
+import {getAllCharacters} from "../../actions/character";
 
 const List = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -11,7 +11,7 @@ const List = () => {
 
     const lastPage = locations?.info.pages;
 
-    useEffect(() => {dispatch(getAllLocations(currentPage));}, [dispatch, currentPage]);
+    useEffect(() => {dispatch(getAllCharacters(currentPage));}, [dispatch, currentPage]);
 
     const handleScroll = (event) => {
         const target = event.target;

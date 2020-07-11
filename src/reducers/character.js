@@ -1,4 +1,4 @@
-import { GET_LOCATIONS } from '../actions/location';
+import { GET_CHARACTERS } from '../actions/character';
 
 const initialState = {
     info: {
@@ -9,17 +9,17 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        case GET_LOCATIONS:
+        case GET_CHARACTERS:
             return { ...state, info: {  isLoading: true } };
 
-        case 'GET_LOCATIONS_SUCCESS':
+        case 'GET_CHARACTERS_SUCCESS':
             return {
                 ...state,
                 info: { isLoading: false, pages: action.payload.info.pages },
                 results: [...state.results, ...action.payload.results],
             };
 
-        case 'GET_LOCATIONS_ERROR':
+        case 'GET_CHARACTERS_ERROR':
             return {
                 ...state,
                 info: {  isLoading: false, error: action.error },
